@@ -5,6 +5,7 @@ import { categories } from './iconList';
 
 export default function LeftDrawer() {
     const Drawers = styled(Box)({
+        position:"sticky",
         background: "black",
         width: "30rem",
         overflowY: "scroll",
@@ -12,11 +13,12 @@ export default function LeftDrawer() {
         color: "#f1f1f1",
         alignItems: "Left",
         display: "flex",
+        flex:1,
         flexDirection: "column",
         gap: "2rem",
-        padding:"10px 0px",
-        
-
+        padding:"15px 0px",
+        top:50,
+        borderRight:'1px solid gray'
     })
     const Icons = styled(Typography)({
 
@@ -39,8 +41,8 @@ export default function LeftDrawer() {
     })
     return (
         <Drawers>
-            {categories[0] && categories.map(e => (
-                <ListItems><Icons >{e.icon}</Icons><Typography sx={{color:"white",fontSize: "100%", "@media (max-width:697px)":{
+            {categories[0] && categories.map((e,i) => (
+                <ListItems key={i}><Icons >{e.icon}</Icons><Typography sx={{color:"white",fontSize: "100%", "@media (max-width:697px)":{
                     fontSize: "80%",
                 } ,"@media (max-width:602px)":{
                     fontSize: "50%",

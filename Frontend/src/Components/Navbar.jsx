@@ -14,7 +14,7 @@ export default function Navbar({LeftDraweropen,setLeftDraweropen}) {
     const Searchbar = styled(InputBase)({
         width: "90%",  
         fontSize:"2rem",
-        padding:"1px",
+        padding:"1px 10px",
         color:"white",
         minWidth:"70px",
         borderRadius:"2rem",
