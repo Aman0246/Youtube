@@ -21,8 +21,8 @@ const TextFields=styled(Box)({
 
 export default function Registratin() {
   return (
-    <Box sx={{display:'flex',justifyContent:"center",alignItems:'center',width:"100%",marginTop:"10px",flexDirection:'column'}}>
-      <Box sx={{display:'flex',justifyContent:"center",borderRadius:"10px",alignItems:'center',backgroundColor:"white",width:"30%",flexDirection:'column'}} >
+    <Box sx={{display:'flex',justifyContent:"center",alignItems:'center',width:"100%",marginTop:"10px",flexDirection:'column',height:"98vh"}}>
+      <Box sx={{display:'flex',justifyContent:"center",borderRadius:"10px",alignItems:'center',backgroundColor:"white",width:"30%","@media (max-width:900px)":{width:"70%"},flexDirection:'column'}} >
             <Box sx={{position:"relative"}}> <img style={{width:80, height:80,borderRadius:"50%"}} src="https://media.istockphoto.com/id/1130884625/vector/user-member-vector-icon-for-ui-user-interface-or-profile-face-avatar-app-in-circle-design.jpg?s=612x612&w=0&k=20&c=1ky-gNHiS2iyLsUPQkxAtPBWH1BZt0PKBB1WBtxQJRE=" alt="Dp" />
             <AddAPhotoIcon sx={{position:"absolute",color:"#4a7700",cursor:"pointer",bottom:16,right:11,fontSize:"21px"}}/>
             </Box>
