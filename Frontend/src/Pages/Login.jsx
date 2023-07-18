@@ -1,110 +1,46 @@
-import React, { useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { Box, Button, Typography } from '@mui/material'
+import React from 'react'
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import TextField from '@mui/material/TextField';
+import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
-import { AiFillEye } from "react-icons/ai";
-import { AiFillEyeInvisible } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { loginRedux } from "../Redux/userSlice";
+const TextFields=styled(Box)({
+  "& .MuiInputLabel-root":{
+    fontSize:"16px",
+    color:"Black"
+  },
+  "& .MuiInput-input":{
+    color:"black",
+    fontSize:"16px"
+  }
 
-export default function Signup() {
-  const [eye, seteye] = useState(false);
-  const eyehandle = () => {
-    seteye(!eye);
-  };
 
-  //=====================================
-  //=====================================
+})
 
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
-  const navigate = useNavigate();
-  const handlesubmit = async (e) => {
-    e.preventDefault();
-    try {
-      let user = await axios.post("/login", { email, password });
-      if (user.data.status === false) {
-        toast.error(user.data.message);
-        navigate("/signup");
-      }
-      if (user.data.status === true) {
-        //=========================================
-        dispatch(loginRedux(user));
-        localStorage.setItem("token",user.data.token );
-         //=========================================
-        toast.success(useData.user.fname + " " + user.data.messege);
-        navigate("/home");
-      }
-      // console.log(useData.user)
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
+export default function Login() {
   return (
-    <div className="w-full h-[100vh] flex  justify-center pt-[95px] bg-slate-200">
-      <div className="bg-white h-[28rem] w-[20rem]  flex flex-col items-center  md:w-[30rem] md:mt-8 rounded-lg ">
-        <div className=" flex  text-6xl text-center justify-items-center pt-3 items-center ">
-          {" "}
-          <FaUserCircle></FaUserCircle>
-        </div>
-        <h1 className="item-center md:text-3xl text-2xl font-bold">Log in</h1>
-        <div className=" w-full left-0 mt-5">
-          <form
-            onSubmit={handlesubmit}
-            className="w-full  flex flex-col gap-2 px-5 "
-            action=""
-          >
-            <label className="text-xl font-bold" htmlFor="email">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={(e) => setemail(e.target.value)}
-              className=" mt-2 focus-within:outline-blue-500 border-2 h-8 px-5 bg-gray-200  rounded-xl"
-            />
-            <div className="relative w-full flex flex-col ">
-              <label className="text-xl font-bold" htmlFor="password">
-                Password
-              </label>
-              <input
-                type={eye ? "text" : "password"}
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
-                className=" mt-2 border-2 h-8 focus-within:outline-blue-500 px-5 bg-gray-200  rounded-xl"
-              />
-              {eye ? (
-                <div className="absolute right-2 bottom-2">
-                  <AiFillEye onClick={eyehandle}></AiFillEye>
-                </div>
-              ) : (
-                <div className="absolute right-2 bottom-2">
-                  <AiFillEyeInvisible onClick={eyehandle}></AiFillEyeInvisible>
-                </div>
-              )}
-            </div>
-            <button
-              type="submit"
-              className="m-auto px-9 py-3 rounded-full font-bold shadow-md bg-blue-300 "
-            >
-              Login
-            </button>
-            <div className="text-l font-bold ">
-              Already have Accout ?
-              <Link
-                className="underline underline-offset-2 text-blue-500   "
-                to="/signup"
-              >
-                Sign up
-              </Link>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
+    <Box sx={{display:'flex',justifyContent:"center",alignItems:'center',width:"100%",marginTop:"10px",flexDirection:'column'}}>
+      <Box sx={{display:'flex',justifyContent:"center",borderRadius:"10px",alignItems:'center',backgroundColor:"white",width:"30%",flexDirection:'column'}} >
+            <Box sx={{position:"relative"}}> <img style={{width:80, height:80,borderRadius:"50%"}} src="https://media.istockphoto.com/id/1130884625/vector/user-member-vector-icon-for-ui-user-interface-or-profile-face-avatar-app-in-circle-design.jpg?s=612x612&w=0&k=20&c=1ky-gNHiS2iyLsUPQkxAtPBWH1BZt0PKBB1WBtxQJRE=" alt="Dp" />
+                     </Box>
+
+          <TextFields sx={{display:"flex",gap:3 ,flexDirection:"column",justifyContent:"center",alignItems:'Left',width:"90%"}}>
+        <TextField id="standard-basic" type='email' label="Email" variant="standard" />
+         <TextField id="standard-basic" label="Password" variant="standard" />
+          </TextFields>
+          <Button sx={{marginTop:"10px",fontSize:"16px"}} variant="contained">Login</Button>
+          <Typography sx={{color:"black",fontSize:"15px"}}>--- or ---</Typography>
+<Link to={"/signup"}>
+
+          <Button sx={{marginTop:"10px",fontSize:"16px",paddingX:"2rem",backgroundColor:"green",margin:"10px"}} variant="contained">go to Signup</Button>
+</Link>
+
+
+                  
+
+      </Box>
+    </Box>
+  )
 }
