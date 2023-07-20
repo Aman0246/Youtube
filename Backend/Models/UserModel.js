@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const nameRegex = /^[a-zA-Z\s\-]+$/;
 
 const UserSchema = new mongoose.Schema(
   {
@@ -6,11 +8,13 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      match: nameRegex,
     },
     email: {
       type: String,
       required: true,
       unique: true,
+      match: emailRegex,
     },
     password: {
       type: String,
@@ -33,4 +37,4 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("User", UserSchema);
+export default  mongoose.model("User", UserSchema);
