@@ -1,5 +1,6 @@
 import { createError } from "../error.js"
 import UserModel from "../Models/UserModel.js"
+import Videomodel from "../Models/Videomodel.js"
 //update User
  export const updateUser=async(req,res,next)=>{
   if(req.params.id!=req.user.id)return next(createError(404,"you can update your account only "))
@@ -58,16 +59,22 @@ export const unsubscribe=async(req,res,next)=>{
 }
 //Like User
 export const like=async(req,res,next)=>{
+  const id=req.user.id;
+  const videoId=req.params.videoId;
   try {
-    
+      await Videomodel.findByIdAndUpdate(videoId,{$addToSet:{likes:id},$pull:{dislikes:id}})
+      res.status(200).send({status:true,message:"liked"})
   } catch (err) {
     next(err)
   }
 }
 //Dislike User
 export const dislike=async(req,res,next)=>{
+  const id=req.user.id;
+  const videoId=req.params.videoId;
   try {
-    
+      await Videomodel.findByIdAndUpdate(videoId,{$addToSet:{dislikes:id},$pull:{likes:id}})
+      res.status(200).send({status:true,message:"liked"})
   } catch (err) {
     next(err)
   }

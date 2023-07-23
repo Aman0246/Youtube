@@ -6,6 +6,7 @@ const Signup =lazy(()=>import('../Pages/Registratin'))
 const Login =lazy(()=>import('../Pages/Login'))
 const Home =lazy(()=>import("../Pages/Home"))
 const VideoPage =lazy(()=>import('../Pages/VideoPage'))
+import Loading from "../Components/CircularProgress/Loading"
 
 export default function RightSide({LeftDraweropen}) {
   console.log(LeftDraweropen)
@@ -18,10 +19,13 @@ export default function RightSide({LeftDraweropen}) {
   return (
     <RightSide>
     <Routes>
-            <Route path='/' element={<Suspense fallback={<div>Loading...</div>}><Home/></Suspense>}></Route>
-            <Route path='/video/:id' element={<Suspense fallback={<div>Loading...</div>}><VideoPage LeftDraweropen={LeftDraweropen}/></Suspense>}></Route>
-            <Route path='/signup' element={<Suspense fallback={<div>Loading...</div>}><Signup/></Suspense>}/>
-            <Route path='/login' element={<Suspense fallback={<div>Loading...</div>}><Login/></Suspense>}/>
+            <Route path='/random' element={<Suspense fallback={<Loading/>}><Home type="random"/></Suspense>}></Route>
+            <Route path='/' element={<Suspense fallback={<Loading/>}><Home type="random"/></Suspense>}></Route>
+            <Route path='/trends' element={<Suspense fallback={<Loading/>}><Home type="trend"/></Suspense>}></Route>
+            <Route path='/sub' element={<Suspense fallback={<Loading/>}><Home type="sub"/></Suspense>}></Route>
+            <Route path='/video/:id' element={<Suspense fallback={<Loading/>}><VideoPage LeftDraweropen={LeftDraweropen}/></Suspense>}></Route>
+            <Route path='/signup' element={<Suspense fallback={<Loading/>}><Signup/></Suspense>}/>
+            <Route path='/login' element={<Suspense fallback={<Loading/>}><Login/></Suspense>}/>
           </Routes>
     </RightSide>
   )

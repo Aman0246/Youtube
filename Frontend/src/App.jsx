@@ -2,8 +2,12 @@ import Navbar from './Components/Navbar'
 import './App.css'
 import { Box } from '@mui/material'
 import LeftDrawer from './Components/LeftDrawer'
-import { useState } from 'react'
-import RightSide from './Components/RightSide'
+import { Suspense, lazy, useState } from 'react'
+import axios from "axios"
+import Loading from "./Components/CircularProgress/Loading"
+const RightSide =lazy(()=>import("./Components/RightSide"))
+axios.defaults.baseURL = import.meta.env.VITE_PORT;
+axios.defaults.withCredentials=true;
 function App() {
   const [LeftDraweropen, setLeftDraweropen] = useState(true)
 
@@ -13,9 +17,7 @@ function App() {
       <Navbar setLeftDraweropen={setLeftDraweropen} LeftDraweropen={LeftDraweropen} />
       <Box sx={{ display: "flex", gap: "0px" }}>
         {LeftDraweropen && <LeftDrawer/>}
-        <RightSide setLeftDraweropen={setLeftDraweropen} LeftDraweropen={LeftDraweropen}  >
-        </RightSide>
-      
+        <Suspense fallback={<Loading/>}><RightSide setLeftDraweropen={setLeftDraweropen} LeftDraweropen={LeftDraweropen}/></Suspense>   
       </Box>
 
     </>
