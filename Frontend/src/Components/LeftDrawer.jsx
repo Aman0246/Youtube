@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from '@emotion/styled';
 import { Box, Typography } from '@mui/material';
 import { categories } from './iconList';
+import { Link } from 'react-router-dom';
 
 export default function LeftDrawer() {
     const Drawers = styled(Box)({
@@ -36,17 +37,22 @@ export default function LeftDrawer() {
         }
 
     })
-    const ListItems=styled(Box)({
-        backgroundColor:"black",boxShadow:"none",borderRadius:"5px",cursor:"pointer",padding:"0px 10px",margin:"1px 0px", display: "flex", alignItems: "center", justifyContent: "flex-start",border:"none",'&:hover':{backgroundColor:"#2c2323"} ,
+    const ListItems=styled(Link)({
+   backgroundColor:"black",boxShadow:"none",borderRadius:"5px",cursor:"pointer",padding:"0px 10px",margin:"1px 0px", display: "flex", alignItems: "center", justifyContent: "flex-start",border:"none",'&:hover':{backgroundColor:"#2c2323"} ,
     })
     return (
         <Drawers>
             {categories[0] && categories.map((e,i) => (
-                <ListItems key={i}><Icons >{e.icon}</Icons><Typography sx={{color:"white",fontSize: "100%", "@media (max-width:697px)":{
-                    fontSize: "80%",
-                } ,"@media (max-width:602px)":{
-                    fontSize: "50%",
-                }}}>{e.name}</Typography></ListItems>
+                
+                    <ListItems key={i} to={`/${e.name}`} style={{textDecoration:"none"}}>
+                    <Icons >{e.icon}</Icons><Typography sx={{color:"white",fontSize: "100%", "@media (max-width:697px)":{
+                        fontSize: "80%",
+                    } ,"@media (max-width:602px)":{
+                        fontSize: "50%",
+                    }}}>{e.name=="random"?"New":e.name&&e.name=="trends"?"Explore":e.name&&e.name=="sub"?"Subcription":e.name}</Typography>
+                    </ListItems>
+
+            
             ))}
         </Drawers>
 

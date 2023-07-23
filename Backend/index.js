@@ -7,8 +7,10 @@ import commentRoutes from "./Routes/Comment.js"
 import authRoutes from "./Routes/auth.js"
 import videoRoutes from "./Routes/Video.js"
 import cookieParser from 'cookie-parser'
+import cors from "cors"
 dotenv.config()
 const app=express()
+app.use(cors({origin:process.env.ORIGIN, credentials:true}));
 app.use(cookieParser())
 mongoose.connect(process.env.MONGOCONNECT).then(()=>{console.log("mongoose connected")}).catch(()=>{console.log("mongo is not connectd")})
 app.use(express.json())
@@ -16,6 +18,7 @@ app.use("/api/users",userRoutes)
 app.use("/api/auth",authRoutes)
 app.use("/api/videos",videoRoutes)
 app.use("/api/comments",commentRoutes)
+
 
 app.use((err,req,res,next)=>{
     const status=err.status||500;

@@ -10,11 +10,12 @@ import SportsBaseballOutlinedIcon from '@mui/icons-material/SportsBaseballOutlin
 import MovieCreationOutlinedIcon from '@mui/icons-material/MovieCreationOutlined'
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined'
 import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined'
+import ExploreIcon from '@mui/icons-material/Explore';
 
 export const categories = [
-    { name: 'New', icon:<HomeOutlinedIcon></HomeOutlinedIcon>},
-    { name: 'Subscription', icon:<SubscriptionsIcon /> },
-    { name: 'Coding', icon: <VideoLibraryIcon /> },
+    { name: 'random', icon:<HomeOutlinedIcon></HomeOutlinedIcon>},
+    { name: 'trends', icon:<ExploreIcon/> },
+    { name: 'sub', icon: <SubscriptionsIcon/> },
     { name: 'ReactJS', icon: <RestoreIcon /> },
     { name: 'Video', icon: <SmartDisplayIcon /> },
     { name: 'NextJS', icon: <WatchLaterOutlinedIcon /> },
