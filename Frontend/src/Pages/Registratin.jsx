@@ -37,12 +37,12 @@ export default function Registratin() {
   }
   const handleSubmit = async(e) => {
     e.preventDefault()
-    console.log(inputs)
+    // console.log(inputs)
     if (inputs.name.length == 0 || inputs.email.length == 0) return toast.error("Empty filed")
     if (inputs.password != inputs.cpassword||inputs.password.length==0||inputs.cpassword.length==0) return toast.error("Password not matched")
     if(!validator.isEmail(inputs.email)) return toast.error("Invalid Email")
-    if(inputs.number.length!=10)return toast.error("only 10 digits")
     try {
+      if(inputs.number.length!=10)return toast.error("only 10 digits")
       await axios.post("/auth/signup",inputs).then((e)=>{
         if(e.data.status== true){
           toast.success(e.data.message)

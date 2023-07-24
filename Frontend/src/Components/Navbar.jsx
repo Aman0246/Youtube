@@ -9,8 +9,9 @@ import styled from '@emotion/styled';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 import { Link } from 'react-router-dom';
+import AccountMenu from './NavbarMenu';
 export default function Navbar({ LeftDraweropen, setLeftDraweropen }) {
     const Searchbar = styled(InputBase)({
         width: "90%",
@@ -79,7 +80,7 @@ export default function Navbar({ LeftDraweropen, setLeftDraweropen }) {
                    
                     <Box1 ><MenuIcon onClick={() => { setLeftDraweropen(!LeftDraweropen), console.log(LeftDraweropen) }} style={{ color: "white", marginRight: "1rem" }} /> <Link  to={"/"} style={{textDecoration:"none"}}><Box1><YouTubeIcon /><Typography sx={{ fontSize: "3rem", "@media (max-width :522px)": { display: "none" } }}>YouTube</Typography></Box1></Link></Box1>
                     <Box2><Searchbar placeholder='Search...' sx={{}} /><SearchIcon sx={{ borderLeft: "1px solid gray", paddingLeft: "3px" }} /></Box2>
-                    <Box3><VideoCameraBackIcon /><NotificationsIcon /> <Link to={"/login"} style={{textDecoration:"none !important"}}><AccountCircleIcon sx={{color:"white",fontSize:"3rem"}} titleAccess='Signup' /> </Link>  </Box3>
+                    <Box3><VideoCameraBackIcon /><NotificationsIcon /> <AccountMenu/></Box3>
 
                 </FullBox>
             </Toolbar>
