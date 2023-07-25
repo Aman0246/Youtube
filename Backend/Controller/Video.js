@@ -110,7 +110,7 @@ export const sub = async (req, res, next) => {
       })
     );
 
-    res.status(200).send(list.flat().sort((a, b) => b.createdAt - a.createdAt));
+    res.status(200).send({data:list.flat().sort((a, b) => b.createdAt - a.createdAt)});
   } catch (err) {
     next(err);
   }

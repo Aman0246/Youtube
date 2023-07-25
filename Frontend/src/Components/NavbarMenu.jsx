@@ -13,6 +13,7 @@ import Logout from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeLoginUser } from '../REDUX/LoginSlice';
+import axios from 'axios';
 
 export default function AccountMenu() {
   let d=useDispatch()
@@ -25,11 +26,13 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleLogout=()=>{
+  const handleLogout=async()=>{
+    await axios.get("/auth/logout")
+    localStorage.clear("persist:root")
     d(removeLoginUser())
     console.log(s)
   }
-  // console.log(s.LoginUserSlice.loginUserData.email)
+  // console.log(s.LoginUserSlice.loginUserData.img)
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>

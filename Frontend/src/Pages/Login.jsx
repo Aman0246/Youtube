@@ -1,14 +1,25 @@
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import styled from '@emotion/styled';
 import { Link, useNavigate } from 'react-router-dom';
 import validator from 'validator';
 import axios from 'axios';
 import toast from "react-hot-toast"
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch,} from 'react-redux'
 import { addLoginUser } from '../REDUX/LoginSlice';
+import GoogleIcon from '@mui/icons-material/Google';
+//====================================================
+import {auth,provider} from "../Components/Firebase/Firebase"
+import {signInWithPopup} from "firebase/auth"
+//====================================================
+// export const auth = getAuth()
+// export const provider = new GoogleAuthProvider()
+
+
+
+
 const TextFields=styled(Box)({
   "& .MuiInputLabel-root":{
     fontSize:"16px",
@@ -57,6 +68,18 @@ export default function Login() {
       )
     }
   }
+  const signInWithGoogle=()=>{
+  
+    signInWithPopup(auth,provider).then((result)=>{
+      console.log(result)
+      axios.post("/auth/google",{name:result.user.displayName,email:result.user.email,img:result.user.photoURL}).then((e)=>{
+        // console.log(e.data.data)
+        dispatch(addLoginUser(e.data.data))
+        navigate("/random")
+      })
+    }).catch((e)=>{console.log(e)})
+
+  }
   return (
     <Box sx={{display:'flex',justifyContent:"center",alignItems:'center',width:"100%",marginTop:"10px",flexDirection:'column',height:"98vh"}}>
       <Box sx={{display:'flex',justifyContent:"center",borderRadius:"10px",alignItems:'center',backgroundColor:"white","@media (max-width:900px)":{width:"70%"},width:"30%",flexDirection:'column'}} >
@@ -69,6 +92,9 @@ export default function Login() {
           </TextFields>
           <Button sx={{marginTop:"10px",fontSize:"16px"}} onClick={handleSubmitt} variant="contained">Login</Button>
           <Typography sx={{color:"black",fontSize:"15px"}}>--- or ---</Typography>
+          {/* //=================================================== */}
+          <Button variant="contained" color='primary'  onClick={signInWithGoogle}> <GoogleIcon/>..  Signin with Google </Button>
+          {/* //=================================================== */}
 <Link to={"/signup"}>
 
           <Button sx={{marginTop:"10px",fontSize:"16px",paddingX:"2rem",backgroundColor:"green",margin:"10px"}} variant="contained">go to Signup</Button>

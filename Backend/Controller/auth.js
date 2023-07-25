@@ -3,6 +3,7 @@ import { hassPassword,compare } from "../Bcrypt/bcrypt.js"
 import { createError } from "../error.js";
 import jwt from "jsonwebtoken"
 import dotenv from'dotenv'
+import { response } from "express";
 dotenv.config()
 //create user
 export const signup=async(req,res,next)=>{   
@@ -35,4 +36,41 @@ try {
 } catch (err) {
     next(err)
 }
+}
+export const logout=async(req,res,next)=>{   
+try {
+   
+    res.clearCookie("access_token")
+
+   return res.status(200).send({status:true,message:"logOut Succesfully"})
+
+} catch (err) {
+    next(err)
+}
+}
+
+
+export const googleAuth=async(req,res,next)=>{
+    try {
+       const user=await UserModel.findOne({email:req.body.email})
+       if(user){
+        var token =jwt.sign({id:user._id},process.env.JWT)
+        res.cookie("access_token",token,{httpOnly:true}).send({status:true,message:"Login Successfull",data:user,token:token})
+       }
+    
+       else{
+        const newUser= new UserModel({
+            ...req.body,
+            fromGoogle:true
+        })
+        const saveduser=await newUser.save();
+        const user=await UserModel.findOne({email:req.body.email})
+        var token =jwt.sign({id:user._id},process.env.JWT)
+        res.cookie("access_token",token,{httpOnly:true}).send({status:true,message:"Login Successfull",data:user,token:token})
+
+       }
+       
+    } catch (err) {
+        next(err)
+    }
 }
