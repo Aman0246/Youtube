@@ -6,7 +6,7 @@ import { Suspense, lazy, useState } from 'react'
 import axios from "axios"
 import Loading from "./Components/CircularProgress/Loading"
 const RightSide =lazy(()=>import("./Components/RightSide"))
-axios.defaults.baseURL = import.meta.env.VITE_PORT;
+axios.defaults.baseURL = import.meta.env.VITE_port;
 axios.defaults.withCredentials=true;
 function App() {
   const [LeftDraweropen, setLeftDraweropen] = useState(true)
